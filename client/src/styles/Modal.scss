@@ -1,0 +1,282 @@
+// Переменные
+$primary: #fbbf24;
+$primary-dark: #f59e0b;
+$primary-light: #fcd34d;
+$dark: #0a0a0a;
+$dark-light: #1a1a1a;
+$dark-lighter: #2a2a2a;
+$text: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.8);
+$text-muted: rgba(255, 255, 255, 0.5);
+$shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+$transition: all 0.3s ease;
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-container {
+  background: rgba($dark-lighter, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 85vh; /* Уменьшил с 90vh до 85vh */
+  overflow: hidden;
+  border: 1px solid rgba($primary, 0.2);
+  box-shadow: $shadow, 0 0 0 1px rgba($primary, 0.1);
+  animation: slideUp 0.4s ease;
+  display: flex;
+  flex-direction: column; /* Добавил flex-контейнер */
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px; /* Уменьшил паддинг */
+  border-bottom: 1px solid rgba($primary, 0.2);
+  position: relative;
+  flex-shrink: 0; /* Запрещаем сжиматься */
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, $primary, $primary-light, $primary, transparent);
+  }
+}
+
+.modal-content {
+  padding: 25px 30px; /* Уменьшил паддинг */
+  overflow-y: auto;
+  flex: 1; /* Растягивается, но не бесконечно */
+  scrollbar-width: thin;
+  scrollbar-color: $primary $dark-lighter;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $dark-lighter;
+    border-radius: 10px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $primary;
+    border-radius: 10px;
+    
+    &:hover {
+      background: $primary-light;
+    }
+  }
+}
+
+.modal-footer {
+  padding: 15px 30px; /* Уменьшил паддинг */
+  border-top: 1px solid rgba($primary, 0.2);
+  text-align: right;
+  background: rgba($dark-lighter, 0.95); /* Добавил фон */
+  flex-shrink: 0; /* Запрещаем сжиматься */
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.modal-btn {
+  padding: 12px 40px;
+  background: $primary;
+  color: $dark;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
+  min-width: 160px; /* Минимальная ширина */
+  
+  &:hover {
+    background: $primary-light;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba($primary, 0.4);
+  }
+}
+
+// Стили для контента
+.policy-date,
+.terms-date {
+  color: $text-muted;
+  margin-bottom: 25px; /* Уменьшил отступ */
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.policy-section,
+.terms-section {
+  margin-bottom: 25px; /* Уменьшил отступ */
+}
+
+.policy-section:last-child,
+.terms-section:last-child {
+  margin-bottom: 0; /* Убрал отступ у последней секции */
+}
+
+.policy-section-title,
+.terms-section-title {
+  font-size: 1.2rem; /* Уменьшил размер */
+  font-weight: 600;
+  color: $primary;
+  margin-bottom: 12px; /* Уменьшил отступ */
+  position: relative;
+  padding-left: 15px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px; /* Уменьшил */
+    height: 18px; /* Уменьшил */
+    background: $primary;
+    border-radius: 10px;
+  }
+}
+
+.policy-text,
+.terms-text {
+  font-size: 0.9rem; /* Уменьшил размер */
+  line-height: 1.5; /* Уменьшил межстрочный интервал */
+  color: $text-secondary;
+  margin-bottom: 10px; /* Уменьшил отступ */
+}
+
+.terms-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0; /* Уменьшил отступ */
+  
+  li {
+    font-size: 0.9rem; /* Уменьшил размер */
+    line-height: 1.5; /* Уменьшил межстрочный интервал */
+    color: $text-secondary;
+    margin-bottom: 6px; /* Уменьшил отступ */
+    padding-left: 18px; /* Уменьшил */
+    position: relative;
+    
+    &::before {
+      content: '•';
+      color: $primary;
+      font-size: 1.1rem; /* Уменьшил */
+      position: absolute;
+      left: 4px; /* Сдвинул */
+      top: -2px;
+    }
+  }
+}
+
+.policy-company,
+.terms-company {
+  margin-top: 25px; /* Уменьшил отступ */
+  padding: 15px 20px; /* Уменьшил паддинг */
+  background: rgba($primary, 0.05);
+  border-radius: 20px;
+  border-left: 4px solid $primary;
+  
+  p {
+    margin-bottom: 4px; /* Уменьшил отступ */
+    color: $text-secondary;
+    font-size: 0.9rem; /* Уменьшил размер */
+    
+    strong {
+      color: $primary;
+    }
+  }
+}
+
+// Анимации
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Адаптивность
+@media (max-width: 768px) {
+  .modal-container {
+    max-height: 90vh; /* На мобилках можно чуть больше */
+  }
+  
+  .modal-header {
+    padding: 15px 20px;
+  }
+  
+  .modal-title {
+    font-size: 1.3rem;
+  }
+  
+  .modal-content {
+    padding: 15px 20px;
+  }
+  
+  .modal-footer {
+    padding: 12px 20px;
+  }
+  
+  .modal-btn {
+    width: 100%; /* На мобилках кнопка на всю ширину */
+    padding: 12px 20px;
+  }
+  
+  .policy-section-title,
+  .terms-section-title {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-title {
+    font-size: 1.1rem;
+  }
+  
+  .modal-close {
+    width: 32px;
+    height: 32px;
+    font-size: 1.5rem;
+  }
+  
+  .policy-section-title,
+  .terms-section-title {
+    font-size: 1rem;
+  }
+}

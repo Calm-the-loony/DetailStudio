@@ -1,0 +1,231 @@
+// Переменные
+$primary: #fbbf24;
+$primary-dark: #f59e0b;
+$primary-light: #fcd34d;
+$dark: #0a0a0a;
+$dark-light: #1a1a1a;
+$dark-lighter: #2a2a2a;
+$text: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.8);
+$text-muted: rgba(255, 255, 255, 0.5);
+$transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+.about {
+  position: relative;
+  background: linear-gradient(135deg, $dark, $dark-light);
+  color: $text;
+  padding: 100px 24px;
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
+
+  // Фоновая текстура
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 30%, rgba($primary, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  &__container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 50px;
+    color: $text;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+    padding: 0 20px;
+    
+    &-accent {
+      color: $primary;
+      font-weight: 800;
+      margin: 0 10px;
+      font-size: 3rem;
+    }
+    
+    // Нижняя линия
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, $primary, $primary-light, $primary, transparent);
+      border-radius: 10px;
+    }
+  }
+
+  &__content {
+    position: relative;
+  }
+
+  &__text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: $text-secondary;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: $transition;
+    text-align: left;
+    padding: 20px 30px;
+    position: relative;
+    background: rgba($dark-lighter, 0.3);
+    border-radius: 20px;
+    border-left: 3px solid $primary;
+    
+    &.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    &--second {
+      transition-delay: 0.2s;
+    }
+    
+    strong {
+      color: $primary;
+      font-weight: 700;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: rgba($primary, 0.2);
+        border-radius: 10px;
+        z-index: -1;
+      }
+    }
+    
+    &-dropcap {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: $primary;
+      float: left;
+      line-height: 0.8;
+      margin-right: 10px;
+      margin-top: 5px;
+      opacity: 0.8;
+    }
+    
+    // Эффект при наведении
+    &:hover {
+      background: rgba($primary, 0.05);
+      border-left-width: 5px;
+    }
+  }
+
+  // Декоративные линии
+  &__line {
+    position: absolute;
+    background: rgba($primary, 0.1);
+    z-index: 1;
+    
+    &--left {
+      top: 20%;
+      left: 5%;
+      width: 1px;
+      height: 200px;
+    }
+    
+    &--right {
+      bottom: 20%;
+      right: 5%;
+      width: 1px;
+      height: 200px;
+    }
+  }
+
+  // Угловые элементы
+  &__corner {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    z-index: 1;
+    
+    &--tl {
+      top: 10%;
+      left: 8%;
+      border-top: 1px solid rgba($primary, 0.2);
+      border-left: 1px solid rgba($primary, 0.2);
+      border-radius: 20px 0 0 0;
+    }
+    
+    &--br {
+      bottom: 10%;
+      right: 8%;
+      border-bottom: 1px solid rgba($primary, 0.2);
+      border-right: 1px solid rgba($primary, 0.2);
+      border-radius: 0 0 20px 0;
+    }
+  }
+}
+
+// Адаптивность
+@media (max-width: 768px) {
+  .about {
+    padding: 80px 20px;
+    
+    &__title {
+      font-size: 2.2rem;
+      
+      &-accent {
+        font-size: 2.5rem;
+      }
+    }
+    
+    &__text {
+      font-size: 1rem;
+      padding: 15px 20px;
+      
+      &-dropcap {
+        font-size: 2.8rem;
+      }
+    }
+    
+    &__line {
+      display: none;
+    }
+    
+    &__corner {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    padding: 60px 15px;
+    
+    &__title {
+      font-size: 1.8rem;
+      
+      &-accent {
+        font-size: 2rem;
+      }
+    }
+    
+    &__corner {
+      display: none;
+    }
+  }
+}

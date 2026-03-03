@@ -1,0 +1,322 @@
+// Переменные
+$primary: #fbbf24;
+$primary-dark: #f59e0b;
+$primary-light: #fcd34d;
+$dark: #0a0a0a;
+$dark-light: #1a1a1a;
+$dark-lighter: #2a2a2a;
+$text: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.8);
+$text-muted: rgba(255, 255, 255, 0.5);
+$shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+$transition: all 0.3s ease;
+
+.contact {
+  position: relative;
+  padding: 80px 24px;
+  background: linear-gradient(135deg, $dark, $dark-light);
+  font-family: 'Montserrat', sans-serif;
+  color: $text;
+  overflow: hidden;
+
+  &__container {
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    
+    &-accent {
+      color: $primary;
+      margin: 0 10px;
+    }
+  }
+
+  &__subtitle {
+    text-align: center;
+    color: $text-secondary;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  &__info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  &__card {
+    background: rgba($dark-lighter, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 25px;
+    border: 1px solid rgba($primary, 0.1);
+    transition: $transition;
+
+    &:hover {
+      transform: translateY(-5px);
+      border-color: rgba($primary, 0.3);
+      box-shadow: 0 20px 40px -15px rgba($primary, 0.3);
+    }
+
+    &--full {
+      grid-column: span 2;
+    }
+  }
+
+  &__card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: $primary;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__text {
+    font-size: 1rem;
+    color: $text;
+    margin-bottom: 5px;
+    line-height: 1.5;
+  }
+
+  &__text-light {
+    font-size: 0.9rem;
+    color: $text-muted;
+  }
+
+  &__link {
+    color: $text;
+    text-decoration: none;
+    transition: $transition;
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: $primary;
+      transition: width 0.3s ease;
+    }
+
+    &:hover {
+      color: $primary;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  &__details {
+    background: rgba($dark-lighter, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 30px;
+    border: 1px solid rgba($primary, 0.2);
+  }
+
+  &__details-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: $primary;
+    margin-bottom: 25px;
+    position: relative;
+    padding-left: 15px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 25px;
+      background: $primary;
+      border-radius: 10px;
+    }
+  }
+
+  &__details-grid {
+    display: grid;
+    gap: 15px;
+  }
+
+  &__details-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 15px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba($primary, 0.1);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__details-label {
+    color: $text-muted;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  &__details-value {
+    color: $text;
+    font-size: 0.95rem;
+    font-weight: 400;
+  }
+
+  &__map {
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    height: 350px;
+    border: 1px solid rgba($primary, 0.2);
+  }
+
+  &__map-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(0.5) brightness(0.7);
+    transition: $transition;
+
+    &:hover {
+      filter: grayscale(0) brightness(1);
+    }
+  }
+
+  &__map-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba($dark-lighter, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba($primary, 0.3);
+    color: $text;
+    font-size: 0.9rem;
+    pointer-events: none;
+  }
+
+  &__map-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+// Адаптивность
+@media (max-width: 1200px) {
+  .contact {
+    &__details-item {
+      grid-template-columns: 120px 1fr;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .contact {
+    &__content {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    &__info {
+      order: 2;
+    }
+
+    &__right {
+      order: 1;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 60px 20px;
+
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__info {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    &__card {
+      padding: 20px;
+
+      &--full {
+        grid-column: span 1;
+      }
+    }
+
+    &__details {
+      padding: 20px;
+    }
+
+    &__details-item {
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+
+    &__map {
+      height: 300px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 40px 15px;
+
+    &__title {
+      font-size: 1.8rem;
+    }
+
+    &__subtitle {
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+
+    &__map-overlay {
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      justify-content: center;
+    }
+  }
+}

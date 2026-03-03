@@ -1,0 +1,364 @@
+// Переменные
+$primary: #fbbf24;
+$primary-dark: #f59e0b;
+$primary-light: #fcd34d;
+$dark: #0a0a0a;
+$dark-light: #1a1a1a;
+$dark-lighter: #2a2a2a;
+$text: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.8);
+$text-muted: rgba(255, 255, 255, 0.5);
+$shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+$transition: all 0.3s ease;
+
+.reviews {
+  position: relative;
+  padding: 80px 24px;
+  background: linear-gradient(135deg, $dark, $dark-light);
+  font-family: 'Montserrat', sans-serif;
+  color: $text;
+  overflow: hidden;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    
+    &-accent {
+      color: $primary;
+      margin: 0 10px;
+    }
+  }
+
+  &__subtitle {
+    text-align: center;
+    color: $text-secondary;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+
+  &__form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba($dark-lighter, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 40px;
+    border: 1px solid rgba($primary, 0.2);
+  }
+
+  &__form-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+    color: $primary;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__input, &__textarea {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba($dark, 0.5);
+    border: 1px solid rgba($primary, 0.2);
+    border-radius: 15px;
+    color: $text;
+    font-size: 1rem;
+    transition: $transition;
+    font-family: 'Montserrat', sans-serif;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+      background: rgba($dark, 0.8);
+    }
+
+    &::placeholder {
+      color: $text-muted;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  &__rating-select {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px 0;
+
+    .rating-star {
+      font-size: 2.5rem;
+      color: $text-muted;
+      cursor: pointer;
+      transition: $transition;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      &.selected {
+        color: $primary;
+        text-shadow: 0 0 10px $primary;
+      }
+    }
+  }
+
+  &__submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 30px;
+    background: $primary;
+    color: $dark;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: $transition;
+    margin-top: 20px;
+
+    .btn-icon {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover:not(:disabled) {
+      background: $primary-light;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba($primary, 0.4);
+
+      .btn-icon {
+        transform: translateX(5px);
+      }
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__success {
+    text-align: center;
+    color: $primary;
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba($primary, 0.1);
+    border-radius: 15px;
+    border: 1px solid rgba($primary, 0.3);
+  }
+}
+
+.review {
+  &__card {
+    background: rgba($dark-lighter, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 25px;
+    border: 1px solid rgba($primary, 0.1);
+    transition: $transition;
+
+    &:hover {
+      transform: translateY(-5px);
+      border-color: rgba($primary, 0.3);
+      box-shadow: 0 20px 40px -15px rgba($primary, 0.3);
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  &__avatar {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, $primary, $primary-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $dark;
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: $text;
+  }
+
+  &__car {
+    font-size: 0.9rem;
+    color: $text-muted;
+  }
+
+  &__rating {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+  }
+
+  &__star {
+    font-size: 1.3rem;
+    color: $text-muted;
+
+    &.active {
+      color: $primary;
+      text-shadow: 0 0 10px $primary;
+    }
+  }
+
+  &__comment {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: $text-secondary;
+    margin-bottom: 15px;
+  }
+
+  &__date {
+    font-size: 0.85rem;
+    color: $text-muted;
+    text-align: right;
+  }
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: $text-secondary;
+  font-size: 0.9rem;
+}
+
+.form-icon {
+  width: 18px;
+  height: 18px;
+  color: $primary;
+}
+
+// Адаптивность
+@media (max-width: 768px) {
+  .reviews {
+    padding: 60px 20px;
+
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    &__form-container {
+      padding: 30px 20px;
+    }
+  }
+
+  .review__card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews__title {
+    font-size: 1.8rem;
+  }
+
+  .review__avatar {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+}
+// Стили для чекбокса согласия
+.consent-group {
+  margin: 10px 0 5px;
+}
+
+.consent-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: $text-secondary;
+  font-size: 0.9rem;
+}
+
+.consent-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: $primary;
+  border-radius: 5px;
+  
+  &:focus {
+    outline: 2px solid rgba($primary, 0.3);
+  }
+}
+
+.consent-text {
+  line-height: 1.4;
+}
+
+.consent-link {
+  color: $primary;
+  text-decoration: none;
+  border-bottom: 1px dotted $primary;
+  transition: $transition;
+  
+  &:hover {
+    color: $primary-light;
+    border-bottom-color: $primary-light;
+  }
+}
+
+@media (max-width: 480px) {
+  .consent-label {
+    align-items: flex-start;
+  }
+  
+  .consent-checkbox {
+    margin-top: 2px;
+  }
+}
