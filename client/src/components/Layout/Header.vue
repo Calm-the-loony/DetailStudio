@@ -8,10 +8,21 @@
       <nav :class="['header__nav', { open: isMenuOpen }]">
         <a href="/" @click="goToHome">Главная</a>
         <a href="#services" @click="scrollToSection('services')">Услуги</a>
+        <a href="#portfolio" @click="scrollToSection('portfolio')">Портфолио</a>
         <a href="#advantages" @click="scrollToSection('advantages')">Преимущества</a>
-        <a href="#about" @click="scrollToSection('about')">О нас</a>
-        <a href="#reviews" @click="scrollToSection('reviews')">Отзывы</a>
-        <a href="#contact" @click="scrollToSection('contact')">Контакты</a>
+
+        <!-- Выпадающее меню для остальных пунктов -->
+        <div class="dropdown">
+          <span class="dropdown__toggle">Еще</span>
+          <div class="dropdown__menu">
+            <a href="#about" @click="scrollToSection('about')">О нас</a>
+            <a href="#reviews" @click="scrollToSection('reviews')" class="dropdown-item">Отзывы</a>
+            <a href="#contact" @click="scrollToSection('contact')" class="dropdown-item"
+              >Контакты</a
+            >
+          </div>
+        </div>
+
         <a href="/login" class="login-link">Вход</a>
       </nav>
 
@@ -54,10 +65,8 @@ export default {
 
     const scrollToSection = (sectionId) => {
       closeMenu();
-      // Если мы не на главной, сначала переходим на главную
       if (window.location.pathname !== "/") {
         window.location.href = "/";
-        // Даем время на загрузку страницы, потом скроллим
         setTimeout(() => {
           const element = document.getElementById(sectionId);
           if (element) {

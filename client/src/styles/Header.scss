@@ -1,5 +1,5 @@
 // Переменные - желтая цветовая гамма
-$primary: #fbbf24; // Теплый желтый
+$primary: #fbbf24;
 $primary-dark: #f59e0b;
 $primary-light: #fcd34d;
 $accent: #263238;
@@ -53,7 +53,7 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
     cursor: pointer;
     position: relative;
     padding-right: 20px;
-    min-width: 200px; // Фиксированная ширина для логотипа
+    min-width: 200px;
     
     &::before {
       content: '';
@@ -100,23 +100,24 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
   &__nav {
     display: flex;
     align-items: center;
-    justify-content: center; // Центрируем меню
-    flex: 1; // Занимает все доступное пространство
-    margin: 0 15px; // Уменьшили отступы
+    justify-content: center;
+    flex: 1;
+    margin: 0 15px;
 
-    a {
-      margin: 0 4px; // ЕЩЕ УМЕНЬШИЛИ отступы между пунктами
-      font-size: 0.85rem; // ЕЩЕ уменьшили шрифт
+    // Основные пункты меню
+    a:not(.dropdown-item) {
+      margin: 0 4px;
+      font-size: 0.85rem;
       font-weight: 500;
       color: $text-secondary;
       text-decoration: none;
       text-transform: uppercase;
-      letter-spacing: 0.3px; // ЕЩЕ уменьшили межбуквенное расстояние
+      letter-spacing: 0.3px;
       transition: all 0.3s ease;
-      padding: 5px 10px; // ЕЩЕ уменьшили паддинги
+      padding: 5px 10px;
       position: relative;
-      border-radius: 25px; // Чуть уменьшили радиус
-      white-space: nowrap; // Запрещаем перенос текста
+      border-radius: 25px;
+      white-space: nowrap;
       
       &::after {
         content: '';
@@ -136,17 +137,17 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
         background: rgba($primary, 0.1);
         
         &::after {
-          width: 30%; // ЕЩЕ уменьшили ширину подчеркивания
+          width: 30%;
         }
       }
       
       // Кнопка входа
-      &:last-child {
+      &.login-link {
         background: transparent;
-        border: 1.5px solid $primary; // Сделали обводку тоньше
-        padding: 5px 16px; // Уменьшили паддинги
-        margin-left: 10px; // Уменьшили отступ перед кнопкой входа
-        border-radius: 25px; // Уменьшили радиус
+        border: 1.5px solid $primary;
+        padding: 5px 16px;
+        margin-left: 10px;
+        border-radius: 25px;
         
         &::after {
           display: none;
@@ -160,6 +161,95 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
         }
       }
     }
+
+    // Выпадающее меню "Еще"
+    .dropdown {
+      position: relative;
+      
+      &:hover {
+        .dropdown__menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+      }
+    }
+
+    .dropdown__toggle {
+      margin: 0 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: $text-secondary;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      transition: all 0.3s ease;
+      padding: 5px 10px;
+      border-radius: 25px;
+      white-space: nowrap;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      
+      &::after {
+        content: '';
+        width: 0;
+        height: 0;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: 4px solid $text-secondary;
+        transition: transform 0.3s ease;
+      }
+      
+      &:hover {
+        color: $text;
+        background: rgba($primary, 0.1);
+        
+        &::after {
+          border-top-color: $primary;
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .dropdown__menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      min-width: 200px;
+      background: rgba($dark-light, 0.98);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 10px 0;
+      border: 1px solid $border;
+      box-shadow: $shadow;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1001;
+      
+      a {
+        display: block;
+        padding: 10px 20px;
+        color: $text-secondary;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background: rgba($primary, 0.1);
+          color: $primary;
+          padding-left: 25px;
+        }
+        
+        &.dropdown-item {
+          margin: 0;
+          border-radius: 0;
+        }
+      }
+    }
   }
 
   // Бургер-меню
@@ -168,19 +258,19 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
-    padding: 6px; // Уменьшили паддинг
-    border-radius: 10px; // Уменьшили радиус
+    padding: 6px;
+    border-radius: 10px;
     transition: all 0.3s ease;
     
     .bar {
-      width: 22px; // Сделали чуть уже
+      width: 22px;
       height: 2px;
       background: $text;
       transition: all 0.3s ease;
       border-radius: 10px;
       
       &:nth-child(2) {
-        width: 18px; // Уменьшили
+        width: 18px;
         margin-left: auto;
       }
     }
@@ -198,7 +288,7 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
         
         &:nth-child(2) {
           opacity: 0;
-          transform: translateX(-8px); // Уменьшили
+          transform: translateX(-8px);
         }
         
         &:nth-child(3) {
@@ -225,30 +315,22 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
 // Планшеты
 @media (max-width: 1200px) {
   .header {
-    &__nav a {
-      margin: 0 3px;
-      padding: 5px 8px;
-      font-size: 0.8rem;
-      
-      &:last-child {
-        padding: 5px 14px;
-        margin-left: 8px;
+    &__nav {
+      a:not(.dropdown-item) {
+        margin: 0 3px;
+        padding: 5px 8px;
+        font-size: 0.8rem;
+        
+        &.login-link {
+          padding: 5px 14px;
+          margin-left: 8px;
+        }
       }
-    }
-  }
-}
-
-@media (max-width: 1100px) {
-  .header {
-    &__nav a {
-      margin: 0 2px;
-      padding: 4px 6px;
-      font-size: 0.75rem;
       
-      &:last-child {
-        padding: 4px 12px;
-        margin-left: 6px;
-        border-width: 1.5px;
+      .dropdown__toggle {
+        margin: 0 3px;
+        padding: 5px 8px;
+        font-size: 0.8rem;
       }
     }
   }
@@ -256,14 +338,21 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
 
 @media (max-width: 992px) {
   .header {
-    &__nav a {
-      font-size: 0.7rem;
-      padding: 4px 5px;
-      letter-spacing: 0.2px;
+    &__nav {
+      a:not(.dropdown-item) {
+        font-size: 0.75rem;
+        padding: 4px 6px;
+        letter-spacing: 0.2px;
+        
+        &.login-link {
+          padding: 4px 12px;
+          margin-left: 6px;
+        }
+      }
       
-      &:last-child {
-        padding: 4px 10px;
-        margin-left: 5px;
+      .dropdown__toggle {
+        font-size: 0.75rem;
+        padding: 4px 6px;
       }
     }
   }
@@ -276,7 +365,7 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
     
     &__logo {
       font-size: 1.8rem;
-      min-width: auto; // Убираем фиксированную ширину на мобилках
+      min-width: auto;
       
       &::after {
         font-size: 0.6rem;
@@ -300,18 +389,23 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
       border-bottom: 1px solid $primary;
       box-shadow: $shadow;
       border-radius: 0 0 20px 20px;
-      margin: 0; // Убираем марджины
+      margin: 0;
       
       &.open {
         transform: translateY(0);
         opacity: 1;
       }
       
-      a {
+      // В мобильной версии показываем все пункты
+      a:not(.dropdown-item),
+      .dropdown__toggle,
+      .dropdown__menu a {
         margin: 5px 0;
         font-size: 1.1rem;
         border-radius: 40px;
         padding: 10px 30px;
+        width: auto;
+        text-align: center;
         
         &::after {
           left: 50%;
@@ -321,11 +415,48 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
         &:hover {
           background: rgba($primary, 0.1);
         }
+      }
+      
+      .dropdown {
+        width: 100%;
         
-        &:last-child {
-          margin: 10px 0 5px;
-          padding: 10px 35px;
+        &:hover .dropdown__menu {
+          position: static;
+          opacity: 1;
+          visibility: visible;
+          transform: none;
+          box-shadow: none;
+          background: transparent;
+          padding: 0;
+          margin-top: 5px;
         }
+      }
+      
+      .dropdown__toggle {
+        justify-content: center;
+        width: auto;
+        margin: 5px auto;
+        
+        &::after {
+          display: none;
+        }
+      }
+      
+      .dropdown__menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        border: none;
+      }
+      
+      .login-link {
+        margin: 10px 0 5px;
+        padding: 10px 35px;
       }
     }
     

@@ -27,10 +27,8 @@ const router = createRouter({
   routes,
 });
 
-// Защита маршрутов
 router.beforeEach((to, from, next) => {
   const isAdmin = localStorage.getItem("isAdmin") === "true";
-
   if (to.meta.requiresAuth && !isAdmin) {
     next("/login");
   } else {

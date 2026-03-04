@@ -8,15 +8,13 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Подключение к MySQL
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '', // Если в OpenServer пароль root, то оставь пустым или 'root'
+    password: '',
     database: 'detailstudio',
     port: 3307
 });
@@ -29,9 +27,6 @@ db.connect((err) => {
     console.log('✅ Подключено к MySQL базе данных');
 });
 
-// ==================== SERVICES ROUTES ====================
-
-// Получить все услуги
 app.get('/api/services', (req, res) => {
     db.query('SELECT * FROM services ORDER BY id DESC', (err, results) => {
         if (err) {
@@ -42,7 +37,6 @@ app.get('/api/services', (req, res) => {
     });
 });
 
-// Получить одну услугу
 app.get('/api/services/:id', (req, res) => {
     const id = req.params.id;
     db.query('SELECT * FROM services WHERE id = ?', [id], (err, results) => {
@@ -57,7 +51,6 @@ app.get('/api/services/:id', (req, res) => {
     });
 });
 
-// Добавить услугу
 app.post('/api/services', (req, res) => {
     const { name, icon, description, price } = req.body;
     
@@ -74,7 +67,6 @@ app.post('/api/services', (req, res) => {
                 return res.status(500).json({ message: 'Ошибка сервера' });
             }
             
-            // Получаем добавленную запись
             db.query('SELECT * FROM services WHERE id = ?', [result.insertId], (err, results) => {
                 if (err) {
                     return res.status(500).json({ message: 'Ошибка получения добавленной услуги' });
@@ -85,7 +77,6 @@ app.post('/api/services', (req, res) => {
     );
 });
 
-// Обновить услугу
 app.put('/api/services/:id', (req, res) => {
     const id = req.params.id;
     const { name, icon, description, price } = req.body;
@@ -103,7 +94,6 @@ app.put('/api/services/:id', (req, res) => {
                 return res.status(404).json({ message: 'Услуга не найдена' });
             }
             
-            // Получаем обновленную запись
             db.query('SELECT * FROM services WHERE id = ?', [id], (err, results) => {
                 if (err) {
                     return res.status(500).json({ message: 'Ошибка получения обновленной услуги' });
@@ -114,7 +104,6 @@ app.put('/api/services/:id', (req, res) => {
     );
 });
 
-// Удалить услугу
 app.delete('/api/services/:id', (req, res) => {
     const id = req.params.id;
     
@@ -132,9 +121,6 @@ app.delete('/api/services/:id', (req, res) => {
     });
 });
 
-// ==================== REVIEWS ROUTES ====================
-
-// Получить все одобренные отзывы (для клиентской части)
 app.get('/api/reviews', (req, res) => {
     db.query('SELECT * FROM reviews WHERE is_approved = TRUE ORDER BY date DESC', (err, results) => {
         if (err) {
@@ -145,7 +131,6 @@ app.get('/api/reviews', (req, res) => {
     });
 });
 
-// Получить все отзывы (для админки, включая неодобренные)
 app.get('/api/admin/reviews', (req, res) => {
     db.query('SELECT * FROM reviews ORDER BY date DESC', (err, results) => {
         if (err) {
@@ -156,7 +141,6 @@ app.get('/api/admin/reviews', (req, res) => {
     });
 });
 
-// Добавить новый отзыв
 app.post('/api/reviews', (req, res) => {
     const { name, car, rating, comment } = req.body;
     
@@ -183,7 +167,6 @@ app.post('/api/reviews', (req, res) => {
     );
 });
 
-// Одобрить отзыв (для админки)
 app.put('/api/admin/reviews/:id/approve', (req, res) => {
     const id = req.params.id;
     
@@ -206,7 +189,6 @@ app.put('/api/admin/reviews/:id/approve', (req, res) => {
     });
 });
 
-// Удалить отзыв (для админки)
 app.delete('/api/admin/reviews/:id', (req, res) => {
     const id = req.params.id;
     
@@ -224,9 +206,102 @@ app.delete('/api/admin/reviews/:id', (req, res) => {
     });
 });
 
-// ==================== LOGIN ROUTE ====================
+// ==================== PORTFOLIO ROUTES ====================
 
-// Логин
+app.get('/api/portfolio', (req, res) => {
+    db.query('SELECT * FROM portfolio ORDER BY id DESC', (err, results) => {
+        if (err) {
+            console.error('Ошибка получения работ:', err);
+            return res.status(500).json({ message: 'Ошибка сервера' });
+        }
+        res.json(results);
+    });
+});
+
+app.get('/api/portfolio/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('SELECT * FROM portfolio WHERE id = ?', [id], (err, results) => {
+        if (err) {
+            console.error('Ошибка получения работы:', err);
+            return res.status(500).json({ message: 'Ошибка сервера' });
+        }
+        if (results.length === 0) {
+            return res.status(404).json({ message: 'Работа не найдена' });
+        }
+        res.json(results[0]);
+    });
+});
+
+app.post('/api/portfolio', (req, res) => {
+    const { title, car, category, image_path, description } = req.body;
+    
+    if (!title || !category || !image_path) {
+        return res.status(400).json({ message: 'Название, категория и ссылка на изображение обязательны' });
+    }
+    
+    db.query(
+        'INSERT INTO portfolio (title, car, category, image_path, description) VALUES (?, ?, ?, ?, ?)',
+        [title, car || null, category, image_path, description || null],
+        (err, result) => {
+            if (err) {
+                console.error('Ошибка добавления работы:', err);
+                return res.status(500).json({ message: 'Ошибка сервера' });
+            }
+            
+            db.query('SELECT * FROM portfolio WHERE id = ?', [result.insertId], (err, results) => {
+                if (err) {
+                    return res.status(500).json({ message: 'Ошибка получения добавленной работы' });
+                }
+                res.status(201).json(results[0]);
+            });
+        }
+    );
+});
+
+app.put('/api/portfolio/:id', (req, res) => {
+    const id = req.params.id;
+    const { title, car, category, image_path, description } = req.body;
+    
+    db.query(
+        'UPDATE portfolio SET title = ?, car = ?, category = ?, image_path = ?, description = ? WHERE id = ?',
+        [title, car || null, category, image_path, description || null, id],
+        (err, result) => {
+            if (err) {
+                console.error('Ошибка обновления работы:', err);
+                return res.status(500).json({ message: 'Ошибка сервера' });
+            }
+            
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ message: 'Работа не найдена' });
+            }
+            
+            db.query('SELECT * FROM portfolio WHERE id = ?', [id], (err, results) => {
+                if (err) {
+                    return res.status(500).json({ message: 'Ошибка получения обновленной работы' });
+                }
+                res.json(results[0]);
+            });
+        }
+    );
+});
+
+app.delete('/api/portfolio/:id', (req, res) => {
+    const id = req.params.id;
+    
+    db.query('DELETE FROM portfolio WHERE id = ?', [id], (err, result) => {
+        if (err) {
+            console.error('Ошибка удаления работы:', err);
+            return res.status(500).json({ message: 'Ошибка сервера' });
+        }
+        
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Работа не найдена' });
+        }
+        
+        res.json({ message: 'Работа удалена' });
+    });
+});
+
 app.post('/api/login', (req, res) => {
     const { email, password } = req.body;
     
@@ -244,7 +319,6 @@ app.post('/api/login', (req, res) => {
         }
         
         const user = results[0];
-        // Не отправляем пароль в ответе
         const { password: _, ...userWithoutPassword } = user;
         
         res.json({
@@ -255,9 +329,6 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-// ==================== HEALTH CHECK ====================
-
-// Базовый роут для проверки
 app.get('/api/health', (req, res) => {
     db.query('SELECT 1 + 1 AS solution', (err, results) => {
         if (err) {
@@ -272,9 +343,6 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-// ==================== START SERVER ====================
-
-// Запуск сервера
 app.listen(PORT, () => {
     console.log(`🚀 Сервер запущен на порту ${PORT}`);
     console.log(`📦 Подключение к MySQL: detailstudio`);
@@ -284,5 +352,7 @@ app.listen(PORT, () => {
     console.log(`   POST /api/services - добавить услугу`);
     console.log(`   GET  /api/reviews - одобренные отзывы`);
     console.log(`   POST /api/reviews - добавить отзыв`);
+    console.log(`   GET  /api/portfolio - все работы`);
+    console.log(`   POST /api/portfolio - добавить работу`);
     console.log(`   POST /api/login - авторизация`);
 });

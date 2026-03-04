@@ -1,0 +1,532 @@
+// Переменные
+$primary: #fbbf24;
+$primary-dark: #f59e0b;
+$primary-light: #fcd34d;
+$dark: #0a0a0a;
+$dark-light: #1a1a1a;
+$dark-lighter: #2a2a2a;
+$text: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.8);
+$text-muted: rgba(255, 255, 255, 0.5);
+$shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+$shadow-lg: 0 30px 60px -20px rgba(0, 0, 0, 0.9);
+$glow: 0 0 30px rgba($primary, 0.2);
+$transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+.portfolio {
+  position: relative;
+  padding: 100px 24px;
+  background: linear-gradient(135deg, $dark, $dark-light);
+  font-family: 'Montserrat', sans-serif;
+  color: $text;
+  overflow: hidden;
+
+  // Фоновая текстура
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 30%, rgba($primary, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  &__container {
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+    
+    &-accent {
+      color: $primary;
+      margin: 0 10px;
+      font-size: 2.8rem;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, $primary, $primary-light, $primary, transparent);
+      border-radius: 10px;
+    }
+  }
+
+  &__subtitle {
+    text-align: center;
+    color: $text-secondary;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+  }
+
+  // Загрузка
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    color: $text-secondary;
+  }
+
+  &__spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba($primary, 0.3);
+    border-top-color: $primary;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+  }
+
+  // Ошибка
+  &__error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    color: $text-secondary;
+  }
+
+  &__retry-btn {
+    margin-top: 20px;
+    padding: 10px 30px;
+    background: transparent;
+    border: 2px solid $primary;
+    color: $primary;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: $transition;
+    
+    &:hover {
+      background: $primary;
+      color: $dark;
+    }
+  }
+
+  // Пустое состояние
+  &__empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: $text-muted;
+    font-size: 1.1rem;
+    background: rgba($dark-lighter, 0.3);
+    border-radius: 30px;
+    border: 1px dashed rgba($primary, 0.3);
+  }
+
+  // Фильтры
+  &__filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+  }
+
+  &__filter {
+    padding: 10px 25px;
+    background: transparent;
+    border: 2px solid rgba($primary, 0.3);
+    color: $text-secondary;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: $transition;
+    
+    &:hover {
+      border-color: $primary;
+      color: $primary;
+    }
+    
+    &.active {
+      background: $primary;
+      border-color: $primary;
+      color: $dark;
+    }
+  }
+
+  // Сетка работ
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+    
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Карточка работы
+  &__item {
+    cursor: pointer;
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    
+    @for $i from 1 through 12 {
+      &:nth-child(#{$i}) {
+        animation-delay: 0.1s * $i;
+      }
+    }
+  }
+
+  &__image-wrapper {
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    box-shadow: $shadow;
+    border: 1px solid rgba($primary, 0.1);
+    transition: $transition;
+    
+    &:hover {
+      transform: translateY(-10px);
+      border-color: rgba($primary, 0.3);
+      box-shadow: $shadow-lg, 0 0 30px rgba($primary, 0.2);
+      
+      .portfolio__image {
+        transform: scale(1.1);
+      }
+      
+      .portfolio__overlay {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba($dark, 0.9), transparent);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 25px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  &__item-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $text;
+    margin-bottom: 5px;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+  }
+
+  &__item-car {
+    font-size: 0.95rem;
+    color: $text-secondary;
+    margin-bottom: 10px;
+    transform: translateY(20px);
+    transition: transform 0.4s ease 0.1s;
+  }
+
+  &__item-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    background: $primary;
+    color: $dark;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    width: fit-content;
+    transform: translateY(20px);
+    transition: transform 0.4s ease 0.2s;
+  }
+
+  // Кнопка "Показать еще"
+  &__more {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  &__more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 40px;
+    background: transparent;
+    border: 2px solid $primary;
+    color: $primary;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: $transition;
+    
+    &:hover {
+      background: $primary;
+      color: $dark;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba($primary, 0.4);
+      
+      .portfolio__more-icon {
+        transform: translateY(3px);
+      }
+    }
+  }
+
+  &__more-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  // Lightbox
+  &__lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba($dark, 0.95);
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  &__lightbox-content {
+    background: rgba($dark-lighter, 0.5);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    max-width: 1000px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid rgba($primary, 0.2);
+    box-shadow: $shadow-lg;
+    position: relative;
+    animation: scaleIn 0.4s ease;
+    
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: $dark-lighter;
+      border-radius: 10px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: $primary;
+      border-radius: 10px;
+      
+      &:hover {
+        background: $primary-light;
+      }
+    }
+  }
+
+  &__lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba($dark, 0.5);
+    border: 1px solid rgba($primary, 0.3);
+    color: $text;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: $transition;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      background: $primary;
+      color: $dark;
+      transform: rotate(90deg);
+    }
+  }
+
+  &__lightbox-image-wrapper {
+    width: 100%;
+    max-height: 60vh;
+    overflow: hidden;
+    border-radius: 30px 30px 0 0;
+  }
+
+  &__lightbox-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &__lightbox-info {
+    padding: 30px;
+  }
+
+  &__lightbox-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $primary;
+    margin-bottom: 10px;
+  }
+
+  &__lightbox-car {
+    font-size: 1.2rem;
+    color: $text-secondary;
+    margin-bottom: 10px;
+  }
+
+  &__lightbox-category {
+    display: inline-block;
+    padding: 5px 15px;
+    background: rgba($primary, 0.2);
+    border: 1px solid $primary;
+    color: $primary;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  &__lightbox-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: $text-secondary;
+  }
+}
+
+// Анимации
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Адаптивность
+@media (max-width: 768px) {
+  .portfolio {
+    padding: 60px 20px;
+
+    &__title {
+      font-size: 2rem;
+      
+      &-accent {
+        font-size: 2.2rem;
+      }
+    }
+
+    &__filter {
+      padding: 8px 20px;
+      font-size: 0.85rem;
+    }
+
+    &__lightbox-info {
+      padding: 20px;
+    }
+
+    &__lightbox-title {
+      font-size: 1.6rem;
+    }
+
+    &__lightbox-description {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio {
+    &__title {
+      font-size: 1.8rem;
+      
+      &-accent {
+        font-size: 2rem;
+      }
+    }
+
+    &__filters {
+      gap: 10px;
+    }
+
+    &__filter {
+      padding: 6px 15px;
+      font-size: 0.8rem;
+    }
+
+    &__lightbox-close {
+      top: 10px;
+      right: 10px;
+      width: 35px;
+      height: 35px;
+      font-size: 1.8rem;
+    }
+
+    &__lightbox-title {
+      font-size: 1.4rem;
+    }
+  }
+}

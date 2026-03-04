@@ -7,6 +7,7 @@
       <AdvantagesSection />
       <ServicesSection />
       <ReviewsSection />
+      <PortfolioSection />
       <ContactSection />
     </main>
     <AppFooter />
@@ -21,6 +22,7 @@ import AboutSection from "@/components/Sections/About.vue";
 import AdvantagesSection from "@/components/Sections/Advantages.vue";
 import ServicesSection from "@/components/Sections/Services.vue";
 import ReviewsSection from "@/components/Sections/Reviews.vue";
+import PortfolioSection from "@/components/Sections/Portfolio.vue";
 import ContactSection from "@/components/Sections/Contact.vue";
 
 export default {
@@ -33,6 +35,7 @@ export default {
     AdvantagesSection,
     ServicesSection,
     ReviewsSection,
+    PortfolioSection,
     ContactSection,
   },
 };

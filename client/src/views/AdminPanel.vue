@@ -85,7 +85,7 @@
             <div class="icon-selector">
               <button
                 type="button"
-                v-for="icon in availableIcons"
+                v-for="icon in uniqueIcons"
                 :key="icon.name"
                 class="icon-option"
                 :class="{ selected: newService.icon === icon.svg }"
@@ -176,20 +176,18 @@
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M20 12V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V6C4 4.89543 4.89543 4 6 4H14L20 10V12Z"
+                  d="M20 12V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V12"
                   stroke="currentColor"
                   stroke-width="2"
-                  stroke-linecap="round"
                 />
                 <path
-                  d="M16 4V8H12"
+                  d="M12 2V14M12 14L8 10M12 14L16 10"
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
                 />
-                <circle cx="12" cy="16" r="2" stroke="currentColor" stroke-width="2" />
               </svg>
-              {{ editingId ? "Обновить услугу" : "Добавить услугу" }}
+              {{ editingId ? "Обновить" : "Добавить" }}
             </button>
 
             <button
@@ -293,7 +291,7 @@
                     stroke-linecap="round"
                   />
                 </svg>
-                Редактировать
+                <span>Редактировать</span>
               </button>
               <button class="admin-delete-btn" @click.stop="handleDelete(service.id)">
                 <svg
@@ -309,7 +307,7 @@
                     stroke-linecap="round"
                   />
                 </svg>
-                Удалить
+                <span>Удалить</span>
               </button>
             </div>
           </div>
@@ -334,7 +332,7 @@ export default {
     const isLoading = ref(true);
     const error = ref("");
 
-    // Библиотека иконок (16 штук)
+    // Библиотека иконок (уникальные)
     const availableIcons = [
       {
         name: "Керамика",
@@ -347,10 +345,6 @@ export default {
       {
         name: "Химчистка",
         svg: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 7H4C2.89543 7 2 7.89543 2 9V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19V9C22 7.89543 21.1046 7 20 7Z" stroke="#fbbf24" stroke-width="2"/><path d="M16 21V5C16 3.89543 15.1046 3 14 3H10C8.89543 3 8 3.89543 8 5V21" stroke="#fbbf24" stroke-width="2"/></svg>',
-      },
-      {
-        name: "Защита кузова",
-        svg: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#fbbf24" stroke-width="2"/><path d="M2 17L12 22L22 17M2 12L12 17L22 12" stroke="#fbbf24" stroke-width="2"/></svg>',
       },
       {
         name: "Двигатель",
@@ -371,10 +365,6 @@ export default {
       {
         name: "Автомойка",
         svg: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12H20M8 8L6 12M16 8L18 12" stroke="#fbbf24" stroke-width="2"/><rect x="2" y="12" width="20" height="8" rx="2" stroke="#fbbf24" stroke-width="2"/></svg>',
-      },
-      {
-        name: "Полировка кузова",
-        svg: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="8" stroke="#fbbf24" stroke-width="2"/><path d="M18 6L20 8M6 18L4 20" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/></svg>',
       },
       {
         name: "Диски",
@@ -401,6 +391,16 @@ export default {
         svg: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 8H8M16 8H20M6 16L8 8M18 16L16 8M4 20L6 16M20 20L18 16" stroke="#fbbf24" stroke-width="2"/></svg>',
       },
     ];
+
+    // Убираем дубликаты иконок
+    const uniqueIcons = computed(() => {
+      const seen = new Set();
+      return availableIcons.filter((icon) => {
+        const duplicate = seen.has(icon.svg);
+        seen.add(icon.svg);
+        return !duplicate;
+      });
+    });
 
     // Проверка валидности формы
     const isFormValid = computed(() => {
@@ -527,7 +527,7 @@ export default {
       selectedService,
       isLoading,
       error,
-      availableIcons,
+      uniqueIcons,
       isFormValid,
       selectIcon,
       handleSubmit,
