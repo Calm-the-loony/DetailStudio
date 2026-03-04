@@ -186,7 +186,7 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     background: rgba($dark-lighter, 0.5);
     backdrop-filter: blur(10px);
     border-radius: 30px;
-    padding: 40px 25px;
+    padding: 40px 25px 30px; /* Уменьшил нижний паддинг */
     text-align: center;
     box-shadow: $shadow;
     transition: $transition;
@@ -194,6 +194,10 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     animation: fadeInUp 0.6s ease-out forwards;
     opacity: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 480px; /* Фиксированная минимальная высота */
     
     &:hover {
       transform: translateY(-10px);
@@ -217,11 +221,12 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__icon {
-    margin-bottom: 25px;
+    margin-bottom: 20px; /* Уменьшил */
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0; /* Запрещаем сжатие */
     
     svg {
       width: 70px;
@@ -235,29 +240,60 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 700;
     margin-bottom: 15px;
     color: $primary;
+    flex-shrink: 0; /* Запрещаем сжатие */
+    min-height: 60px; /* Фиксированная высота для заголовка */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__description {
     font-size: 1rem;
-    line-height: 1.6;
+    line-height: 1.5;
     color: $text-secondary;
-    margin-bottom: 25px;
-    min-height: 80px;
+    margin-bottom: 20px; /* Уменьшил */
+    flex: 1; /* Растягивается, но не больше содержимого */
+    min-height: 100px; /* Минимальная высота */
+    max-height: 120px; /* Максимальная высота */
+    overflow-y: auto; /* Скролл если текст слишком длинный */
+    padding: 0 5px;
+    
+    /* Стилизация скроллбара */
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba($dark, 0.3);
+      border-radius: 10px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: rgba($primary, 0.3);
+      border-radius: 10px;
+      
+      &:hover {
+        background: rgba($primary, 0.5);
+      }
+    }
   }
 
   &__footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: auto; /* Прижимаем к низу */
     padding-top: 20px;
     border-top: 1px solid rgba($primary, 0.2);
+    flex-shrink: 0; /* Запрещаем сжатие */
+    min-height: 70px; /* Фиксированная высота */
   }
 
   &__price {
     font-size: 1.4rem;
     font-weight: 700;
     color: $primary;
+    white-space: nowrap; /* Запрещаем перенос */
   }
 
   &__btn {
@@ -270,6 +306,7 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 600;
     font-size: 0.9rem;
     transition: $transition;
+    white-space: nowrap; /* Запрещаем перенос */
     
     &:hover {
       background: $primary;
@@ -289,6 +326,7 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 0 10px 0 0;
     opacity: 0;
     transition: $transition;
+    flex-shrink: 0;
   }
 
   // Плавающий эффект
@@ -337,5 +375,40 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   50% {
     opacity: 0.6;
     transform: scale(1.1);
+  }
+}
+
+// Адаптивность
+@media (max-width: 768px) {
+  .service {
+    &__card {
+      min-height: 450px;
+      padding: 30px 20px 25px;
+    }
+    
+    &__title {
+      font-size: 1.4rem;
+      min-height: 50px;
+    }
+    
+    &__description {
+      max-height: 100px;
+    }
+    
+    &__price {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .service {
+    &__card {
+      min-height: 420px;
+    }
+    
+    &__title {
+      font-size: 1.3rem;
+    }
   }
 }
