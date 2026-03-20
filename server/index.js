@@ -206,7 +206,6 @@ app.delete('/api/admin/reviews/:id', (req, res) => {
     });
 });
 
-// ==================== PORTFOLIO ROUTES ====================
 
 app.get('/api/portfolio', (req, res) => {
     db.query('SELECT * FROM portfolio ORDER BY id DESC', (err, results) => {

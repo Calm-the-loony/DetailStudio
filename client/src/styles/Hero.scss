@@ -9,7 +9,11 @@ $text: #ffffff;
 $text-secondary: rgba(255, 255, 255, 0.8);
 $text-muted: rgba(255, 255, 255, 0.5);
 $shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+$shadow-strong: 0 30px 60px -15px rgba(0, 0, 0, 0.9);
 $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+$border-radius-lg: 40px;
+$border-radius-md: 24px;
+$border-radius-sm: 16px;
 
 .hero {
   position: relative;
@@ -21,7 +25,6 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   
-  // Тонкая текстура
   &::before {
     content: '';
     position: absolute;
@@ -29,7 +32,9 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 30% 40%, rgba($primary, 0.03) 0%, transparent 60%);
+    background: 
+      radial-gradient(circle at 20% 30%, rgba($primary, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba($primary, 0.03) 0%, transparent 50%);
     pointer-events: none;
   }
 
@@ -40,48 +45,44 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 120px 60px 80px; /* Увеличил верхний отступ */
+    padding: 120px 60px 80px;
     position: relative;
-    z-index: 2;
+    z-index: 10;
   }
 
   &__content {
     max-width: 600px;
-    animation: fadeInLeft 0.8s ease-out;
+    animation: fadeInUp 0.8s ease-out;
+    position: relative;
+    z-index: 20;
   }
 
   &__badge {
     display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 500;
+    font-size: 0.85rem;
+    font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: $primary;
     margin-bottom: 30px;
-    padding: 6px 0;
-    position: relative;
-    
-    &::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 40px;
-      height: 2px;
-      background: $primary;
-      border-radius: 4px;
-    }
+    padding: 8px 24px;
+    background: rgba($primary, 0.1);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($primary, 0.2);
+    box-shadow: 0 10px 30px -10px rgba($primary, 0.2);
   }
 
   &__title {
-    font-size: 3.8rem; /* Немного увеличил */
-    font-weight: 700;
+    font-size: 4rem;
+    font-weight: 800;
     line-height: 1.1;
-    margin-bottom: 25px;
+    margin-bottom: 45px;
+    margin-top: 40px;
     
     span {
       color: $primary;
-      font-weight: 800;
+      font-weight: 900;
       position: relative;
       display: inline-block;
       
@@ -100,7 +101,7 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__subtitle {
-    font-size: 1.1rem; /* Немного увеличил */
+    font-size: 1.2rem;
     line-height: 1.7;
     color: $text-secondary;
     margin-bottom: 45px;
@@ -117,24 +118,42 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   &__cta-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
-    font-size: 1rem; /* Немного увеличил */
-    font-weight: 600;
-    padding: 16px 36px; /* Увеличил паддинги */
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 18px 42px;
     background: $primary;
     color: $dark;
     border: none;
     text-decoration: none;
     transition: $transition;
     cursor: pointer;
-    letter-spacing: 0.5px;
-    border-radius: 50px;
-    box-shadow: 0 10px 20px -8px rgba($primary, 0.4);
+    letter-spacing: 1px;
+    border-radius: 60px;
+    box-shadow: 0 15px 35px -10px rgba($primary, 0.5);
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
     
     &:hover {
       background: $primary-light;
       transform: translateY(-3px);
-      box-shadow: 0 15px 30px -8px rgba($primary, 0.6);
+      box-shadow: 0 25px 45px -10px rgba($primary, 0.7);
+      
+      &::before {
+        left: 100%;
+      }
       
       .hero__cta-icon {
         transform: translateX(6px);
@@ -146,19 +165,20 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       border: 2px solid rgba($primary, 0.4);
       color: $text;
       box-shadow: none;
+      backdrop-filter: blur(10px);
       
       &:hover {
         border-color: $primary;
-        background: rgba($primary, 0.05);
+        background: rgba($primary, 0.1);
         transform: translateY(-3px);
-        box-shadow: 0 10px 25px -8px rgba($primary, 0.2);
+        box-shadow: 0 20px 40px -10px rgba($primary, 0.3);
       }
     }
   }
 
   &__cta-icon {
-    width: 20px; /* Увеличил */
-    height: 20px;
+    width: 22px;
+    height: 22px;
     transition: transform 0.3s ease;
   }
 
@@ -167,110 +187,98 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: fadeInRight 0.8s ease-out 0.2s both;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+    height: 600px;
   }
 
-  &__image {
+  &__model-container {
     width: 100%;
-    max-width: 650px; /* Увеличил */
-    height: auto;
+    height: 100%;
     position: relative;
-    z-index: 2;
-    display: block;
-    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
-    transform: scale(1.05); /* Немного увеличил */
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    background: rgba($dark-lighter, 0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba($primary, 0.1);
+    box-shadow: $shadow-strong;
+    
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
   }
 
-  // Декоративные элементы
-  &__shape {
+  &__blob {
     position: absolute;
     border-radius: 50%;
     filter: blur(60px);
-    z-index: 1;
+    z-index: 5;
     
     &--1 {
-      bottom: -150px;
-      right: -100px;
+      bottom: -100px;
+      right: -50px;
       width: 400px;
       height: 400px;
-      background: rgba($primary, 0.03);
-      animation: pulse 10s ease-in-out infinite;
+      background: rgba($primary, 0.05);
+      animation: blobMove 15s ease-in-out infinite;
     }
     
     &--2 {
       top: -100px;
-      left: -100px;
+      left: -50px;
       width: 350px;
       height: 350px;
-      background: rgba($primary-dark, 0.02);
-      animation: pulse 12s ease-in-out infinite reverse;
+      background: rgba($primary-dark, 0.04);
+      animation: blobMove 18s ease-in-out infinite reverse;
     }
   }
 
-  // Минималистичные линии
   &__line {
     position: absolute;
     background: rgba($primary, 0.1);
-    z-index: 1;
+    border-radius: 100px;
+    z-index: 5;
     
     &--vertical {
       top: 0;
-      right: 12%;
-      width: 1px;
+      right: 10%;
+      width: 2px;
       height: 100vh;
+      background: linear-gradient(180deg, transparent, rgba($primary, 0.2), transparent);
     }
     
     &--horizontal {
-      bottom: 15%;
-      left: 8%;
-      width: 180px;
-      height: 1px;
-    }
-    
-    &--corner {
-      bottom: 8%;
-      right: 8%;
-      width: 60px;
-      height: 60px;
-      border-right: 1px solid rgba($primary, 0.15);
-      border-bottom: 1px solid rgba($primary, 0.15);
-      background: transparent;
-      border-radius: 0 0 20px 0;
+      bottom: 20%;
+      left: 5%;
+      width: 200px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba($primary, 0.2), transparent);
     }
   }
 }
 
 // Анимации
-@keyframes fadeInLeft {
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateX(-30px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes pulse {
+@keyframes blobMove {
   0%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
+    transform: translate(0, 0) scale(1);
   }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.1);
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
   }
 }
 
@@ -280,6 +288,14 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     &__overlay {
       padding: 100px 40px 60px;
     }
+    
+    &__title {
+      font-size: 3.5rem;
+    }
+    
+    &__visual {
+      height: 500px;
+    }
   }
 }
 
@@ -288,7 +304,7 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     &__overlay {
       grid-template-columns: 1fr;
       gap: 40px;
-      padding: 120px 40px 80px; /* Увеличил верхний отступ */
+      padding: 120px 40px 80px;
       text-align: center;
     }
 
@@ -297,10 +313,8 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &__badge {
-      &::before {
-        left: 50%;
-        transform: translateX(-50%);
-      }
+      margin-left: auto;
+      margin-right: auto;
     }
 
     &__title {
@@ -310,7 +324,6 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     &__subtitle {
       margin-left: auto;
       margin-right: auto;
-      font-size: 1.1rem;
     }
 
     &__buttons {
@@ -319,15 +332,8 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
     &__visual {
       grid-row: 1;
-      margin-bottom: 40px; /* Увеличил отступ */
-    }
-    
-    &__line--vertical {
-      right: 5%;
-    }
-    
-    &__image {
-      max-width: 550px;
+      margin-bottom: 30px;
+      height: 450px;
     }
   }
 }
@@ -335,7 +341,7 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 @media (max-width: 768px) {
   .hero {
     &__overlay {
-      padding: 100px 30px 60px; /* Увеличил верхний отступ */
+      padding: 100px 30px 60px;
     }
     
     &__title {
@@ -353,21 +359,11 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
     &__cta-btn {
       width: 100%;
-      justify-content: center;
-      padding: 14px 30px;
+      padding: 16px 30px;
     }
     
-    &__line--horizontal {
-      width: 100px;
-    }
-    
-    &__line--corner {
-      width: 40px;
-      height: 40px;
-    }
-    
-    &__image {
-      max-width: 450px;
+    &__visual {
+      height: 350px;
     }
   }
 }
@@ -375,30 +371,15 @@ $transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 @media (max-width: 480px) {
   .hero {
     &__overlay {
-      padding: 90px 20px 50px; /* Увеличил верхний отступ */
+      padding: 90px 20px 50px;
     }
 
     &__title {
       font-size: 2.2rem;
     }
-
-    &__badge {
-      font-size: 0.65rem;
-      letter-spacing: 2px;
-    }
     
-    &__line {
-      &--vertical {
-        display: none;
-      }
-      
-      &--corner {
-        display: none;
-      }
-    }
-    
-    &__image {
-      max-width: 350px;
+    &__visual {
+      height: 280px;
     }
   }
 }
