@@ -10,12 +10,7 @@
 
         <form class="login-form" @submit.prevent="handleLogin">
           <div v-if="error" class="login-error">
-            <svg
-              class="error-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg class="error-icon" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" />
               <path
                 d="M12 8V12M12 16H12.01"
@@ -27,26 +22,16 @@
             <span>{{ error }}</span>
           </div>
 
+          <!-- EMAIL -->
           <div class="input-group" :class="{ focused: focusedField === 'email' }">
             <label class="input-label">
-              <svg
-                class="input-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
                   stroke="currentColor"
                   stroke-width="2"
-                  stroke-linecap="round"
                 />
-                <path
-                  d="M22 6L12 13L2 6"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
+                <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" />
               </svg>
               Email
             </label>
@@ -56,26 +41,22 @@
               v-model="email"
               @focus="focusedField = 'email'"
               @blur="focusedField = ''"
-              placeholder="admin@detailstudio.ru"
+              placeholder="Введите email"
+              autocomplete="off"
               required
             />
           </div>
 
+          <!-- PASSWORD -->
           <div class="input-group" :class="{ focused: focusedField === 'password' }">
             <label class="input-label">
-              <svg
-                class="input-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none">
                 <rect
                   x="3"
                   y="11"
                   width="18"
                   height="11"
                   rx="2"
-                  ry="2"
                   stroke="currentColor"
                   stroke-width="2"
                 />
@@ -87,6 +68,7 @@
               </svg>
               Пароль
             </label>
+
             <div class="password-input-wrapper">
               <input
                 :type="showPassword ? 'text' : 'password'"
@@ -94,16 +76,13 @@
                 v-model="password"
                 @focus="focusedField = 'password'"
                 @blur="focusedField = ''"
-                placeholder="••••••••"
+                placeholder="Введите пароль"
+                autocomplete="new-password"
                 required
               />
+
               <button type="button" class="password-toggle" @click="showPassword = !showPassword">
-                <svg
-                  v-if="!showPassword"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+                <svg v-if="!showPassword" viewBox="0 0 24 24" fill="none">
                   <path
                     d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z"
                     stroke="currentColor"
@@ -111,39 +90,25 @@
                   />
                   <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" />
                 </svg>
-                <svg v-else viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                <svg v-else viewBox="0 0 24 24" fill="none">
+                  <path d="M2 2L22 22" stroke="currentColor" stroke-width="2" />
                   <path
-                    d="M2 2L22 22"
+                    d="M6.7 6.7C4.1 8.4 2.5 11.1 2.5 11.1C2.5 11.1 6 18 12.5 18"
                     stroke="currentColor"
                     stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M6.7 6.7C4.1 8.4 2.5 11.1 2.5 11.1C2.5 11.1 6 18 12.5 18C14.4 18 16.1 17.3 17.5 16.2M9.5 9.5C9.9 9.1 10.4 8.8 11 8.6C11.6 8.4 12.3 8.4 13 8.6C13.7 8.8 14.3 9.2 14.8 9.7C15.3 10.2 15.7 10.8 15.9 11.5C16.1 12.2 16.1 12.9 15.9 13.6"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M19.9 15.5C21.2 13.9 22 11.9 22 11.1C22 11.1 19 4 12 4"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
                   />
                 </svg>
               </button>
             </div>
           </div>
 
+          <!-- BUTTON -->
           <button type="submit" class="login-button" :disabled="isLoading">
             <span v-if="!isLoading">Войти</span>
             <span v-else class="loader"></span>
           </button>
         </form>
-
-        <div class="login-footer">
-          <p>Демо-доступ: admin@detailstudio.ru / admin123</p>
-        </div>
       </div>
     </div>
   </div>
