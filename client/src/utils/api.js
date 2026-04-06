@@ -1,0 +1,1 @@
+export const api = 'http://detail-studio.ru/api';

@@ -207,6 +207,8 @@
 
 <script>
 import { ref, computed, onMounted } from "vue";
+
+import { api } from "@/utils/api";
 import PrivacyModal from "@/components/UI/PrivacyModal.vue";
 
 export default {
@@ -244,7 +246,7 @@ export default {
 
     const fetchReviews = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/reviews");
+        const response = await fetch(`${api}/reviews`);
         if (!response.ok) throw new Error("Ошибка загрузки отзывов");
         reviews.value = await response.json();
       } catch (err) {
@@ -258,7 +260,7 @@ export default {
       if (!isFormValid.value) return;
 
       try {
-        const response = await fetch("http://localhost:5000/api/reviews", {
+        const response = await fetch(`${api}/reviews`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

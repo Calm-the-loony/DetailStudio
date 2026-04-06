@@ -321,6 +321,8 @@
 import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 
+import { api } from "@/utils/api";
+
 export default {
   name: "AdminPanel",
   setup() {
@@ -430,7 +432,7 @@ export default {
     // Загрузка услуг
     const fetchServices = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/services");
+        const response = await fetch(`${api}/services`);
         if (!response.ok) throw new Error("Ошибка загрузки услуг");
         services.value = await response.json();
       } catch (err) {
@@ -448,8 +450,8 @@ export default {
 
       try {
         const url = editingId.value
-          ? `http://localhost:5000/api/services/${editingId.value}`
-          : "http://localhost:5000/api/services";
+          ? `${api}/services/${editingId.value}`
+          : `${api}/services`;
         const method = editingId.value ? "PUT" : "POST";
 
         const response = await fetch(url, {
@@ -494,7 +496,7 @@ export default {
       if (!confirm("Вы уверены, что хотите удалить эту услугу?")) return;
 
       try {
-        const response = await fetch(`http://localhost:5000/api/services/${id}`, {
+        const response = await fetch(`${api}/services/${id}`, {
           method: "DELETE",
         });
 
