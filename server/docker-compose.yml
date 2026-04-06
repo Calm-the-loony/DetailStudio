@@ -13,9 +13,9 @@ services:
   detail_studio_db:
     image: mysql:latest
     restart: always
-    environments:
-      - MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      - MYSQL_DATABASE: ${DB_NAME}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
     ports:
       - "3333:3306"
     networks:
