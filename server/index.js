@@ -23,14 +23,6 @@ const db = mysql.createPool({
     port: process.env.DB_PORT
 });
 
-db.connect((err) => {
-    if (err) {
-        console.error('❌ Ошибка подключения к MySQL:', err);
-        return;
-    }
-    console.log('✅ Подключено к MySQL базе данных');
-});
-
 app.get('/api/services', (req, res) => {
     db.query('SELECT * FROM services ORDER BY id DESC', (err, results) => {
         if (err) {
