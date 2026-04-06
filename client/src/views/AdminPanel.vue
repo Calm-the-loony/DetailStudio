@@ -449,9 +449,7 @@ export default {
       error.value = "";
 
       try {
-        const url = editingId.value
-          ? `${api}/services/${editingId.value}`
-          : `${api}/services`;
+        const url = editingId.value ? `${api}/services/${editingId.value}` : `${api}/services`;
         const method = editingId.value ? "PUT" : "POST";
 
         const response = await fetch(url, {

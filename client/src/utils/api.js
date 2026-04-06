@@ -1,1 +1,1 @@
-export const api = 'http://detail-studio.ru/api';
+export const api = "http://detail-studio.ru/api";

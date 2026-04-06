@@ -50,15 +50,22 @@ $transition: all 0.3s ease;
   border-bottom: 1px solid rgba($primary, 0.2);
   position: relative;
   flex-shrink: 0; /* Запрещаем сжиматься */
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, transparent, $primary, $primary-light, $primary, transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      $primary,
+      $primary-light,
+      $primary,
+      transparent
+    );
   }
 }
 
@@ -68,20 +75,20 @@ $transition: all 0.3s ease;
   flex: 1; /* Растягивается, но не бесконечно */
   scrollbar-width: thin;
   scrollbar-color: $primary $dark-lighter;
-  
+
   &::-webkit-scrollbar {
     width: 6px;
   }
-  
+
   &::-webkit-scrollbar-track {
     background: $dark-lighter;
     border-radius: 10px;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: $primary;
     border-radius: 10px;
-    
+
     &:hover {
       background: $primary-light;
     }
@@ -110,7 +117,7 @@ $transition: all 0.3s ease;
   cursor: pointer;
   transition: $transition;
   min-width: 160px; /* Минимальная ширина */
-  
+
   &:hover {
     background: $primary-light;
     transform: translateY(-2px);
@@ -145,9 +152,9 @@ $transition: all 0.3s ease;
   margin-bottom: 12px; /* Уменьшил отступ */
   position: relative;
   padding-left: 15px;
-  
+
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 50%;
@@ -171,7 +178,7 @@ $transition: all 0.3s ease;
   list-style: none;
   padding: 0;
   margin: 0 0 12px 0; /* Уменьшил отступ */
-  
+
   li {
     font-size: 0.9rem; /* Уменьшил размер */
     line-height: 1.5; /* Уменьшил межстрочный интервал */
@@ -179,9 +186,9 @@ $transition: all 0.3s ease;
     margin-bottom: 6px; /* Уменьшил отступ */
     padding-left: 18px; /* Уменьшил */
     position: relative;
-    
+
     &::before {
-      content: '•';
+      content: "•";
       color: $primary;
       font-size: 1.1rem; /* Уменьшил */
       position: absolute;
@@ -198,12 +205,12 @@ $transition: all 0.3s ease;
   background: rgba($primary, 0.05);
   border-radius: 20px;
   border-left: 4px solid $primary;
-  
+
   p {
     margin-bottom: 4px; /* Уменьшил отступ */
     color: $text-secondary;
     font-size: 0.9rem; /* Уменьшил размер */
-    
+
     strong {
       color: $primary;
     }
@@ -236,28 +243,28 @@ $transition: all 0.3s ease;
   .modal-container {
     max-height: 90vh; /* На мобилках можно чуть больше */
   }
-  
+
   .modal-header {
     padding: 15px 20px;
   }
-  
+
   .modal-title {
     font-size: 1.3rem;
   }
-  
+
   .modal-content {
     padding: 15px 20px;
   }
-  
+
   .modal-footer {
     padding: 12px 20px;
   }
-  
+
   .modal-btn {
     width: 100%; /* На мобилках кнопка на всю ширину */
     padding: 12px 20px;
   }
-  
+
   .policy-section-title,
   .terms-section-title {
     font-size: 1.1rem;
@@ -268,13 +275,13 @@ $transition: all 0.3s ease;
   .modal-title {
     font-size: 1.1rem;
   }
-  
+
   .modal-close {
     width: 32px;
     height: 32px;
     font-size: 1.5rem;
   }
-  
+
   .policy-section-title,
   .terms-section-title {
     font-size: 1rem;

@@ -26,7 +26,7 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
     padding: 12px 0;
     background: $dark;
     border-bottom: 2px solid $primary;
-    
+
     .header__logo {
       &::after {
         width: 60px;
@@ -44,7 +44,7 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
   }
 
   &__logo {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 2rem;
     font-weight: 700;
     color: $text;
@@ -53,9 +53,9 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
     position: relative;
     padding-right: 20px;
     min-width: 200px;
-    
+
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       right: 0;
       top: 50%;
@@ -66,9 +66,9 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
       transition: height 0.3s ease;
       border-radius: 10px;
     }
-    
+
     &::after {
-      content: 'DETAILING';
+      content: "DETAILING";
       position: absolute;
       bottom: -8px;
       left: 0;
@@ -78,17 +78,17 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
       color: $text-muted;
       transition: all 0.3s ease;
     }
-    
+
     span {
       color: $primary;
       font-weight: 800;
     }
-    
+
     &:hover {
       &::before {
         height: 40px;
       }
-      
+
       &::after {
         color: $primary;
         letter-spacing: 4px;
@@ -117,9 +117,9 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
       position: relative;
       border-radius: 25px;
       white-space: nowrap;
-      
+
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: 0;
         left: 50%;
@@ -130,16 +130,16 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
         transition: width 0.3s ease;
         border-radius: 10px;
       }
-      
+
       &:hover {
         color: $text;
         background: rgba($primary, 0.1);
-        
+
         &::after {
           width: 30%;
         }
       }
-      
+
       // Кнопка входа
       &.login-link {
         background: transparent;
@@ -147,11 +147,11 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
         padding: 5px 16px;
         margin-left: 10px;
         border-radius: 25px;
-        
+
         &::after {
           display: none;
         }
-        
+
         &:hover {
           background: $primary;
           color: $dark;
@@ -164,7 +164,7 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
     // Выпадающее меню "Еще"
     .dropdown {
       position: relative;
-      
+
       &:hover {
         .dropdown__menu {
           opacity: 1;
@@ -190,9 +190,9 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
       display: flex;
       align-items: center;
       gap: 4px;
-      
+
       &::after {
-        content: '';
+        content: "";
         width: 0;
         height: 0;
         border-left: 4px solid transparent;
@@ -200,11 +200,11 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
         border-top: 4px solid $text-secondary;
         transition: transform 0.3s ease;
       }
-      
+
       &:hover {
         color: $text;
         background: rgba($primary, 0.1);
-        
+
         &::after {
           border-top-color: $primary;
           transform: rotate(180deg);
@@ -228,7 +228,7 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
       transform: translateY(-10px);
       transition: all 0.3s ease;
       z-index: 1001;
-      
+
       a {
         display: block;
         padding: 10px 20px;
@@ -236,13 +236,13 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
         text-decoration: none;
         font-size: 0.9rem;
         transition: all 0.3s ease;
-        
+
         &:hover {
           background: rgba($primary, 0.1);
           color: $primary;
           padding-left: 25px;
         }
-        
+
         &.dropdown-item {
           margin: 0;
           border-radius: 0;
@@ -260,49 +260,49 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
     padding: 6px;
     border-radius: 10px;
     transition: all 0.3s ease;
-    
+
     .bar {
       width: 22px;
       height: 2px;
       background: $text;
       transition: all 0.3s ease;
       border-radius: 10px;
-      
+
       &:nth-child(2) {
         width: 18px;
         margin-left: auto;
       }
     }
-    
+
     &.active {
       background: rgba($primary, 0.1);
-      
+
       .bar {
         background: $primary;
-        
+
         &:nth-child(1) {
           transform: rotate(45deg) translate(5px, 5px);
           width: 22px;
         }
-        
+
         &:nth-child(2) {
           opacity: 0;
           transform: translateX(-8px);
         }
-        
+
         &:nth-child(3) {
           transform: rotate(-45deg) translate(5px, -5px);
           width: 22px;
         }
       }
     }
-    
+
     &:hover {
       background: rgba($primary, 0.05);
-      
+
       .bar {
         background: $primary;
-        
+
         &:nth-child(2) {
           width: 22px;
         }
@@ -319,13 +319,13 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
         margin: 0 3px;
         padding: 5px 8px;
         font-size: 0.8rem;
-        
+
         &.login-link {
           padding: 5px 14px;
           margin-left: 8px;
         }
       }
-      
+
       .dropdown__toggle {
         margin: 0 3px;
         padding: 5px 8px;
@@ -342,13 +342,13 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
         font-size: 0.75rem;
         padding: 4px 6px;
         letter-spacing: 0.2px;
-        
+
         &.login-link {
           padding: 4px 12px;
           margin-left: 6px;
         }
       }
-      
+
       .dropdown__toggle {
         font-size: 0.75rem;
         padding: 4px 6px;
@@ -361,17 +361,17 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
 @media (max-width: 768px) {
   .header {
     padding: 15px 0;
-    
+
     &__logo {
       font-size: 1.8rem;
       min-width: auto;
-      
+
       &::after {
         font-size: 0.6rem;
         letter-spacing: 2px;
       }
     }
-    
+
     &__nav {
       position: absolute;
       top: 70px;
@@ -389,12 +389,12 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
       box-shadow: $shadow;
       border-radius: 0 0 20px 20px;
       margin: 0;
-      
+
       &.open {
         transform: translateY(0);
         opacity: 1;
       }
-      
+
       // В мобильной версии показываем все пункты
       a:not(.dropdown-item),
       .dropdown__toggle,
@@ -405,20 +405,20 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
         padding: 10px 30px;
         width: auto;
         text-align: center;
-        
+
         &::after {
           left: 50%;
           transform: translateX(-50%);
         }
-        
+
         &:hover {
           background: rgba($primary, 0.1);
         }
       }
-      
+
       .dropdown {
         width: 100%;
-        
+
         &:hover .dropdown__menu {
           position: static;
           opacity: 1;
@@ -430,17 +430,17 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
           margin-top: 5px;
         }
       }
-      
+
       .dropdown__toggle {
         justify-content: center;
         width: auto;
         margin: 5px auto;
-        
+
         &::after {
           display: none;
         }
       }
-      
+
       .dropdown__menu {
         position: static;
         opacity: 1;
@@ -452,13 +452,13 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
         margin: 0;
         border: none;
       }
-      
+
       .login-link {
         margin: 10px 0 5px;
         padding: 10px 35px;
       }
     }
-    
+
     .burger {
       display: flex;
     }
@@ -468,7 +468,7 @@ $glow: 0 0 15px rgba(251, 191, 36, 0.2);
 @media (max-width: 480px) {
   .header__logo {
     font-size: 1.5rem;
-    
+
     &::after {
       bottom: -6px;
       font-size: 0.5rem;

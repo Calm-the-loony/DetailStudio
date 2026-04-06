@@ -15,7 +15,7 @@ $transition: all 0.3s ease;
   position: relative;
   padding: 80px 24px;
   background: linear-gradient(135deg, $dark, $dark-light);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: $text;
   overflow: hidden;
 
@@ -31,7 +31,7 @@ $transition: all 0.3s ease;
     font-weight: 700;
     text-align: center;
     margin-bottom: 15px;
-    
+
     &-accent {
       color: $primary;
       margin: 0 10px;
@@ -76,7 +76,8 @@ $transition: all 0.3s ease;
     gap: 20px;
   }
 
-  &__input, &__textarea {
+  &__input,
+  &__textarea {
     width: 100%;
     padding: 15px 20px;
     background: rgba($dark, 0.5);
@@ -85,7 +86,7 @@ $transition: all 0.3s ease;
     color: $text;
     font-size: 1rem;
     transition: $transition;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
 
     &:focus {
       outline: none;
@@ -331,7 +332,7 @@ $transition: all 0.3s ease;
   cursor: pointer;
   accent-color: $primary;
   border-radius: 5px;
-  
+
   &:focus {
     outline: 2px solid rgba($primary, 0.3);
   }
@@ -346,7 +347,7 @@ $transition: all 0.3s ease;
   text-decoration: none;
   border-bottom: 1px dotted $primary;
   transition: $transition;
-  
+
   &:hover {
     color: $primary-light;
     border-bottom-color: $primary-light;
@@ -357,7 +358,7 @@ $transition: all 0.3s ease;
   .consent-label {
     align-items: flex-start;
   }
-  
+
   .consent-checkbox {
     margin-top: 2px;
   }
