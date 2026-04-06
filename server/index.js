@@ -8,7 +8,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:3000', 'http://detail-studio.ru', 'https://detail-studio.ru'],
+    methods: ["GET", "POST", "OPTIONS", "PUT", "PATCH", "HEAD", "DELETE"],
+    allowedHeaders: ["Authorization", "Content-Type"]
+}));
 app.use(express.json());
 
 const db = mysql.createConnection({
