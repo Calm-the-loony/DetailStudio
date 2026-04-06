@@ -8,10 +8,11 @@ services:
     networks:
       - detailstudio
     depends_on:
-      - detail_studio_db
+      - detailstudio_db
   
-  detail_studio_db:
+  detailstudio_db:
     image: mysql:latest
+    container_name: detailstudio_db
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
