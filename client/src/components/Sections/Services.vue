@@ -51,6 +51,8 @@
 <script>
 import { ref, onMounted } from "vue";
 
+import { api } from "@/utils/api";
+
 export default {
   name: "ServicesSection",
   setup() {
@@ -64,7 +66,7 @@ export default {
       error.value = null;
 
       try {
-        const response = await fetch("http://localhost:5000/api/services");
+        const response = await fetch(`${api}/services`);
         if (!response.ok) throw new Error("Ошибка загрузки услуг");
         const data = await response.json();
         services.value = data;

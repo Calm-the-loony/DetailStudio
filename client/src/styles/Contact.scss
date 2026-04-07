@@ -15,7 +15,7 @@ $transition: all 0.3s ease;
   position: relative;
   padding: 80px 24px;
   background: linear-gradient(135deg, $dark, $dark-light);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: $text;
   overflow: hidden;
 
@@ -31,7 +31,7 @@ $transition: all 0.3s ease;
     font-weight: 700;
     text-align: center;
     margin-bottom: 15px;
-    
+
     &-accent {
       color: $primary;
       margin: 0 10px;
@@ -117,7 +117,7 @@ $transition: all 0.3s ease;
     display: inline-block;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: -2px;
       left: 0;
@@ -153,7 +153,7 @@ $transition: all 0.3s ease;
     padding-left: 15px;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       top: 50%;

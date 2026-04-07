@@ -108,6 +108,7 @@
 
 <script>
 import { ref, computed, onMounted } from "vue";
+import { api } from "@/utils/api";
 
 export default {
   name: "PortfolioSection",
@@ -148,7 +149,7 @@ export default {
       error.value = null;
 
       try {
-        const response = await fetch("http://localhost:5000/api/portfolio");
+        const response = await fetch(`${api}/portfolio`);
         if (!response.ok) throw new Error("Ошибка загрузки работ");
         works.value = await response.json();
       } catch (err) {

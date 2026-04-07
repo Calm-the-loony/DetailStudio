@@ -1,0 +1,32 @@
+services:
+
+  detailstudio_api:
+    build: .
+    container_name: detailstudio_api
+    ports:
+      - "5003:5000"
+    networks:
+      - detailstudio
+    depends_on:
+      - detailstudio_db
+  
+  detailstudio_db:
+    image: mysql:latest
+    container_name: detailstudio_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - "3333:3306"
+    networks:
+      - detailstudio
+    volumes:
+      - detailstudio_data:/var/lib/mysql
+
+volumes:
+  detailstudio_data:
+
+networks:
+  detailstudio:
+    driver: bridge

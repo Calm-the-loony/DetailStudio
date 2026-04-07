@@ -8,23 +8,19 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:3000', 'http://detail-studio.ru', 'https://detail-studio.ru'],
+    methods: ["GET", "POST", "OPTIONS", "PUT", "PATCH", "HEAD", "DELETE"],
+    allowedHeaders: ["Authorization", "Content-Type"]
+}));
 app.use(express.json());
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'detailstudio',
-    port: 3307
-});
-
-db.connect((err) => {
-    if (err) {
-        console.error('❌ Ошибка подключения к MySQL:', err);
-        return;
-    }
-    console.log('✅ Подключено к MySQL базе данных');
+const db = mysql.createPool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT
 });
 
 app.get('/api/services', (req, res) => {

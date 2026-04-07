@@ -117,6 +117,8 @@
 <script>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+
+import { api } from "@/utils/api";
 import AppHeader from "@/components/Layout/Header.vue";
 
 export default {
@@ -143,7 +145,7 @@ export default {
       error.value = "";
 
       try {
-        const response = await fetch("http://localhost:5000/api/login", {
+        const response = await fetch(`${api}/login`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

@@ -12,7 +12,7 @@ $transition: all 0.3s ease;
 .footer {
   background: linear-gradient(135deg, $dark, $dark-light);
   color: $text;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   border-top: 1px solid rgba($primary, 0.2);
   padding: 60px 0 30px;
 
@@ -36,7 +36,7 @@ $transition: all 0.3s ease;
   }
 
   &__logo {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 2rem;
     font-weight: 700;
     color: $text;
@@ -44,14 +44,14 @@ $transition: all 0.3s ease;
     position: relative;
     display: inline-block;
     width: fit-content;
-    
+
     span {
       color: $primary;
       font-weight: 800;
     }
-    
+
     &::after {
-      content: 'DETAILING';
+      content: "DETAILING";
       position: absolute;
       bottom: -10px;
       left: 0;
@@ -60,7 +60,7 @@ $transition: all 0.3s ease;
       letter-spacing: 3px;
       color: $text-muted;
     }
-    
+
     &:hover {
       span {
         color: $primary-light;
@@ -114,7 +114,7 @@ $transition: all 0.3s ease;
     padding-left: 15px;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       top: 50%;
@@ -144,7 +144,7 @@ $transition: all 0.3s ease;
       padding-left: 0;
 
       &::before {
-        content: '→';
+        content: "→";
         position: absolute;
         left: -15px;
         opacity: 0;
